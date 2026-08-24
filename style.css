@@ -1,0 +1,767 @@
+/* ============================================
+   此间处己·一室录  ——  样式
+   古风沉稳, 米黄/宣纸/木色/靛青
+   ============================================ */
+:root {
+  /* 主色 */
+  --paper:        #f4e7c8;   /* 宣纸 */
+  --paper-deep:   #e8d5a3;   /* 旧宣 */
+  --paper-dark:   #d4b97a;   /* 边色 */
+  --ink:          #2a1d10;   /* 墨 */
+  --ink-soft:     #4a3422;
+  --wood:         #8b5a2b;   /* 木 */
+  --wood-deep:    #5e3b18;
+  --seal-red:     #8b1a1a;   /* 印泥 */
+  --gold:         #b08a3e;
+  /* 角色色 */
+  --c-main:   #1a1a1a;
+  --c-song:   #1e3a8a;
+  --c-li:     #10b981;
+  --c-qin:    #f59e0b;
+  /* 维度色 */
+  --v-guanji: #8b1a1a;
+  --v-xiushen: #1e3a8a;
+  --v-jiewu:  #0a7d57;
+  --v-anming: #8b5a2b;
+  /* 杂项 */
+  --shadow-soft: 0 4px 20px rgba(50, 25, 0, 0.25);
+  --shadow-deep: 0 10px 40px rgba(20, 10, 0, 0.45);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 100%; height: 100%;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "FangSong", "STFangsong", "仿宋", "KaiTi", "STKaiti", serif;
+  color: var(--ink);
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+body {
+  background:
+    radial-gradient(ellipse at 50% 30%, #3a2a18 0%, #1a1108 100%);
+}
+button, input { font-family: inherit; }
+/* ========== 顶栏 ========== */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; align-items: center;
+  padding: 10px 18px;
+  background: linear-gradient(180deg, rgba(20,12,6,0.85), rgba(20,12,6,0.6));
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(212,185,122,0.3);
+  z-index: 100;
+  font-size: 14px;
+  color: var(--paper);
+}
+.topbar-title {
+  font-size: 17px;
+  letter-spacing: 4px;
+  color: var(--paper);
+  margin-right: 20px;
+}
+.topbar-stats { display: flex; gap: 14px; flex: 1; align-items: center; }
+.stat, .rel { display: inline-flex; align-items: center; gap: 4px; opacity: 0.9; }
+.stat b, .rel b { font-weight: 700; min-width: 18px; text-align: center; }
+.sep { width: 1px; height: 16px; background: rgba(212,185,122,0.3); margin: 0 4px; }
+.dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+.dot-g { background: var(--v-guanji); }
+.dot-x { background: var(--v-xiushen); }
+.dot-j { background: var(--v-jiewu); }
+.dot-a { background: var(--v-anming); }
+.dot-song { background: var(--c-song); }
+.dot-li { background: var(--c-li); }
+.dot-qin { background: var(--c-qin); }
+.icon-btn {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(212,185,122,0.4);
+  background: rgba(244,231,200,0.08);
+  color: var(--paper);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.icon-btn:hover { background: rgba(244,231,200,0.18); }
+.mute-btn { position: fixed; bottom: 18px; right: 18px; z-index: 50; opacity: 0.7; }
+/* ========== 通用 ========== */
+.hidden { display: none !important; }
+.screen {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  animation: screenIn 0.5s ease;
+}
+@keyframes screenIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+/* 场景背景 */
+.scene-bg {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center 40%;
+  filter: saturate(1.05) contrast(0.98);
+}
+.scene-veil {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.55) 100%);
+}
+/* ========== 按钮（古风） ========== */
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  font-size: 16px;
+  letter-spacing: 2px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+.btn-primary {
+  background: linear-gradient(180deg, var(--wood) 0%, var(--wood-deep) 100%);
+  color: var(--paper);
+  border: 1px solid var(--wood-deep);
+  box-shadow: 0 2px 0 var(--wood-deep), var(--shadow-soft);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 3px 0 var(--wood-deep), 0 6px 16px rgba(0,0,0,0.3); }
+.btn-primary:active { transform: translateY(1px); box-shadow: 0 1px 0 var(--wood-deep); }
+.btn-ghost {
+  background: rgba(244,231,200,0.85);
+  color: var(--ink);
+  border: 1px solid var(--wood);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.btn-ghost:hover { background: var(--paper); }
+.btn-choice {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 14px 20px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--wood);
+  border-left: 4px solid var(--wood);
+  margin-bottom: 12px;
+  font-size: 15px;
+  line-height: 1.7;
+  cursor: pointer;
+  position: relative;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.2s;
+  border-radius: 2px;
+}
+.btn-choice:hover {
+  background: linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+  border-left-color: var(--seal-red);
+  transform: translateX(4px);
+}
+.btn-choice .tag {
+  display: inline-block;
+  padding: 2px 8px;
+  margin-right: 10px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid;
+  vertical-align: middle;
+}
+.tag.tag-优 { color: var(--seal-red); border-color: var(--seal-red); background: rgba(139,26,26,0.08); }
+.tag.tag-中 { color: var(--wood); border-color: var(--wood); background: rgba(139,90,43,0.08); }
+.tag.tag-差 { color: #6b7280; border-color: #6b7280; background: rgba(107,114,128,0.08); }
+/* ========== 袁采卷轴开场 ========== */
+/* 【修改】首页背景为山水卷轴图，去除遮罩 */
+#screen-yuandai {
+  background:
+    url('assets/bg_landscape.png') center/cover no-repeat;
+}
+.yuandai-wrap {
+  display: flex;
+  gap: 36px;
+  padding: 40px 60px;
+  max-width: 920px;
+  align-items: center;
+}
+/* 【修改】左边人物icon删除，替换为yuandai.png */
+.yuandai-svg {
+  width: 240px; height: 320px;
+  background: url('assets/yuandai.png') center/contain no-repeat;
+  background-color: transparent;
+  filter: drop-shadow(0 6px 20px rgba(0,0,0,0.5));
+  opacity: 0;
+  animation: floatY 3s ease-in-out infinite, yuandaiIconIn 0.9s ease 0.6s forwards;
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+/* 袁采小人图标入场：仅淡入，不与 floatY 的上下浮动位移冲突 */
+@keyframes yuandaiIconIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.yuandai-text {
+  background:
+    linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+  padding: 36px 40px;
+  border-radius: 4px;
+  border: 1px solid var(--paper-dark);
+  box-shadow: var(--shadow-deep);
+  max-width: 520px;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 1s ease 1.5s forwards;
+}
+.yuandai-text::before, .yuandai-text::after {
+  content: "";
+  position: absolute;
+  width: 12px; height: 12px;
+  background: var(--seal-red);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+.yuandai-text::before { top: 12px; left: 12px; }
+.yuandai-text::after  { bottom: 12px; right: 12px; }
+.scroll-title {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: var(--ink);
+  text-align: center;
+  margin-bottom: 4px;
+}
+.scroll-sub {
+  text-align: center;
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  letter-spacing: 2px;
+}
+.scroll-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--wood), transparent);
+  margin: 14px 0;
+}
+.scroll-body {
+  font-size: 15px;
+  line-height: 2;
+  color: var(--ink-soft);
+  text-indent: 2em;
+  letter-spacing: 1px;
+}
+.scroll-foot {
+  text-align: center;
+  color: var(--wood);
+  font-size: 13px;
+  letter-spacing: 3px;
+  margin-top: 18px;
+  opacity: 0.7;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 0.9; }
+}
+/* ========== 舍友登场(单人循环) ========== */
+/* 【修改】人物介绍页背景替换为宿舍图，添加遮罩，内容整体居中 */
+#screen-meet {
+  flex-direction: column;
+  padding: 50px 20px;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.6)),
+    url('assets/dorm.png') center/cover no-repeat;
+}
+/* 【修改】按钮取消固定底部，改为流式布局随内容居中 */
+#screen-meet .btn {
+  position: static;
+  transform: none;
+  z-index: 20;
+  min-width: 160px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+.meet-single {
+  position: relative;
+  z-index: 2;
+  background: rgba(244,231,200,0.95);
+  border: 1px solid var(--wood);
+  border-radius: 4px;
+  padding: 28px 36px 24px;
+  text-align: center;
+  box-shadow: var(--shadow-deep);
+  width: min(320px, 80vw);
+  animation: slideUp 0.5s ease;
+}
+/* 【修改】人物图标去除底色，保持透明与背景融合 */
+.meet-icon {
+  width: 165px;
+  height: 255px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 8px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+  background: transparent;
+}
+.meet-name {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  margin-top: 4px;
+}
+.meet-personality {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-top: 10px;
+  line-height: 1.9;
+  letter-spacing: 1px;
+  border-top: 1px dashed var(--paper-dark);
+  padding-top: 10px;
+}
+.meet-text {
+  color: var(--paper);
+  font-size: 15px;
+  line-height: 1.9;
+  text-align: center;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 0 16px;
+}
+.meet-text p { margin: 4px 0; }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* ========== 命名 ========== */
+.name-card {
+  background: rgba(244,231,200,0.95);
+  border: 1px solid var(--wood);
+  padding: 36px 48px;
+  border-radius: 4px;
+  text-align: center;
+  z-index: 2;
+  box-shadow: var(--shadow-deep);
+}
+.name-card h2 { font-size: 22px; letter-spacing: 4px; margin-bottom: 8px; }
+.name-sub { color: var(--ink-soft); margin-bottom: 20px; font-size: 14px; }
+/* 寝室选择卡片 */
+.dorm-card {
+  background: rgba(244,231,200,0.95);
+  border: 1px solid var(--wood);
+  padding: 36px 48px;
+  border-radius: 4px;
+  text-align: center;
+  z-index: 2;
+  box-shadow: var(--shadow-deep);
+}
+.dorm-card h2 { font-size: 22px; letter-spacing: 4px; margin-bottom: 8px; }
+.dorm-choices { display: flex; gap: 20px; justify-content: center; margin-top: 10px; }
+.dorm-btn { min-width: 140px; }
+#input-name {
+  display: block;
+  width: 280px;
+  margin: 0 auto 20px;
+  padding: 12px;
+  font-size: 18px;
+  border: 1px solid var(--wood);
+  background: var(--paper);
+  text-align: center;
+  letter-spacing: 4px;
+  border-radius: 2px;
+  outline: none;
+  font-family: inherit;
+}
+#input-name:focus { border-color: var(--seal-red); }
+/* ========== 主场景 ========== */
+#screen-scene { flex-direction: column; padding-top: 50px; }
+.characters {
+  position: absolute;
+  inset: 50px 0 0 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 0 8% 220px;
+  z-index: 2;
+  pointer-events: none;
+}
+.character {
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.4s;
+}
+.character.speaking { transform: translateY(-12px); }
+/* 【修改】场景人物图标去除底色 */
+.character .stick {
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+  background: transparent;
+}
+.character .name-tag {
+  margin-top: 4px;
+  padding: 2px 10px;
+  background: rgba(244,231,200,0.92);
+  border: 1px solid var(--wood);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-radius: 2px;
+}
+/* 说话人条(浮在对话框上方) */
+/* 【修改】说话人头上移，图标嵌入背景图中，调整内边距适配大图标 */
+.dialog-header {
+  position: absolute;
+  bottom: calc(100% - 24px);
+  left: 32px;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px 8px 8px;
+
+}
+/* 【修改】对话框人物图标放大，去除底色 */
+.dialog-icon {
+  width: 240px;
+  height: 360px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+  background: transparent;
+}
+.dialog-speaker {
+  font-weight: 700;
+  font-size: 32px;
+  letter-spacing: 2px;
+}
+/* 对话框 */
+/* 【修改】调整对话框内边距，优化整体高度提升阅读舒适度 */
+.dialog {
+  position: relative;
+  z-index: 10;
+  margin-top: auto;
+  background:
+    linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+  border-top: 4px solid var(--wood);
+  padding: 28px 40px 26px;
+  box-shadow: 0 -8px 30px rgba(0,0,0,0.4);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.dialog::before {
+  content: "";
+  position: absolute;
+  top: -4px; left: 32px;
+  width: 60px; height: 4px;
+  background: var(--seal-red);
+}
+/* 【修改】加大对话文本最大显示高度，提升可读性 */
+.dialog-body {
+  flex: 1;
+  font-size: 17px;
+  line-height: 2;
+  color: var(--ink);
+  letter-spacing: 1px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+.dialog-body .line { margin-bottom: 4px; }
+.dialog-body .narrator { color: var(--ink-soft); font-style: italic; }
+.dialog-body .speaker { display: none; }
+.dialog > .btn { padding: 8px 16px; font-size: 14px; }
+/* 选择层 */
+.choices {
+  position: relative;
+  z-index: 10;
+  margin-top: auto;
+  padding: 20px 60px 28px;
+  background:
+    linear-gradient(180deg, rgba(244,231,200,0.98) 0%, rgba(232,213,163,0.98) 100%);
+  border-top: 4px solid var(--wood);
+  width: 100%;
+  box-shadow: 0 -8px 30px rgba(0,0,0,0.4);
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.choices-prompt {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+/* ========== 袁采原文浮层 ========== */
+#screen-quote {
+  background: rgba(10, 6, 3, 0.92);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.5s ease;
+}
+.quote-wrap {
+  width: min(760px, 92vw);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.quote-card {
+  background:
+    linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+  padding: 36px 40px;
+  border: 1px solid var(--paper-dark);
+  border-radius: 4px;
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  box-shadow: var(--shadow-deep);
+  position: relative;
+}
+.quote-card::before {
+  content: "";
+  position: absolute;
+  top: 12px; right: 16px;
+  width: 28px; height: 28px;
+  background: var(--seal-red);
+  border-radius: 4px;
+  opacity: 0.55;
+  transform: rotate(-8deg);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.3);
+}
+.quote-card::after {
+  content: "袁采";
+  position: absolute;
+  top: 18px; right: 22px;
+  font-size: 11px;
+  color: var(--paper);
+  letter-spacing: 2px;
+  font-weight: 700;
+  z-index: 2;
+}
+.quote-yuandai { flex-shrink: 0; }
+/* 【修改】袁采原文浮层图标去除底色 */
+.quote-yuandai img {
+  width: 140px; height: auto;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+  background: transparent;
+}
+.quote-content { flex: 1; padding-right: 30px; }
+.quote-line, .quote-insight {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+.quote-mark, .insight-mark { font-size: 22px; line-height: 1.5; flex-shrink: 0; }
+.quote-text {
+  font-size: 18px;
+  color: var(--ink);
+  line-height: 1.9;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+}
+.insight-text {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.9;
+  letter-spacing: 0.5px;
+}
+.quote-effect {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--wood);
+  font-size: 13px;
+  color: var(--wood);
+  letter-spacing: 1px;
+  line-height: 1.8;
+}
+.quote-effect .eff-line { display: inline-block; margin-right: 14px; }
+.quote-effect b { font-weight: 700; }
+.quote-effect .pos { color: var(--c-li); font-weight: 700; }
+.quote-effect .neg { color: var(--c-main); font-weight: 700; }
+/* ========== 总结 ========== */
+/* 【修改】结束页/总结页替换为山水卷轴背景，加大顶部内边距解决仪表盘被顶栏遮挡的问题 */
+#screen-summary {
+  background:
+    linear-gradient(rgba(20, 12, 6, 0.8), rgba(20, 12, 6, 0.9)),
+    url('assets/bg_landscape.png') center/cover no-repeat;
+  padding: 120px 20px 40px;
+  align-items: flex-start;
+  overflow-y: auto;
+}
+.summary-wrap {
+  width: min(820px, 96vw);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  animation: fadeIn 0.8s ease;
+}
+.summary-title {
+  text-align: center;
+  font-size: 32px;
+  letter-spacing: 8px;
+  color: var(--paper);
+  text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  margin-bottom: 4px;
+}
+.summary-sub {
+  text-align: center;
+  font-size: 13px;
+  color: var(--paper-dark);
+  letter-spacing: 3px;
+  margin-bottom: 14px;
+}
+.summary-card {
+  background:
+    linear-gradient(180deg, rgba(244,231,200,0.95) 0%, rgba(232,213,163,0.95) 100%);
+  border: 1px solid var(--wood);
+  border-radius: 4px;
+  padding: 22px 28px;
+  box-shadow: var(--shadow-deep);
+}
+.summary-card h3 {
+  font-size: 18px;
+  letter-spacing: 4px;
+  color: var(--ink);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--paper-dark);
+}
+.summary-tables {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 720px) {
+  .summary-tables { grid-template-columns: 1fr; }
+}
+.summary-values, .summary-rels, .summary-arch { display: flex; flex-direction: column; gap: 8px; }
+.summary-row {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; color: var(--ink-soft);
+}
+.summary-row .label { flex: 1; }
+.summary-row .bar {
+  flex: 1.4; height: 8px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 4px; overflow: hidden; position: relative;
+}
+.summary-row .bar > span {
+  display: block; height: 100%;
+  background: linear-gradient(90deg, var(--wood), var(--gold));
+  transition: width 0.5s ease;
+}
+.summary-row .bar > span.pos { background: linear-gradient(90deg, #4a7d3a, #7eb060); }
+.summary-row .bar > span.neg { background: linear-gradient(90deg, #8b1a1a, #c25858); }
+.summary-row .num { width: 30px; text-align: right; font-weight: 700; }
+.summary-quotes {
+  list-style: none;
+  counter-reset: q;
+}
+.summary-quotes li {
+  counter-increment: q;
+  padding: 12px 0 12px 36px;
+  border-bottom: 1px dashed var(--paper-dark);
+  position: relative;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+.summary-quotes li:last-child { border-bottom: none; }
+.summary-quotes li::before {
+  content: "[" counter(q) "]";
+  position: absolute;
+  left: 0; top: 14px;
+  font-size: 12px;
+  color: var(--seal-red);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.summary-quotes .src {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--wood);
+  font-style: italic;
+  letter-spacing: 1px;
+}
+.summary-final {
+  font-size: 16px;
+  line-height: 2.2;
+  color: var(--ink);
+  letter-spacing: 1px;
+  text-indent: 2em;
+}
+.summary-arch {
+  text-align: center;
+  font-size: 22px;
+  color: var(--seal-red);
+  letter-spacing: 6px;
+  padding: 14px 0;
+  border: 1px dashed var(--seal-red);
+  background: rgba(139,26,26,0.05);
+  border-radius: 2px;
+}
+#btn-replay, #btn-exit { align-self: center; }
+.summary-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+/* ========== 动画 ========== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* 滚动条 */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+::-webkit-scrollbar-thumb { background: var(--wood); border-radius: 4px; }
+/* 小屏适配 */
+@media (max-width: 720px) {
+  .topbar-title { font-size: 14px; letter-spacing: 2px; }
+  .topbar-stats { font-size: 12px; gap: 8px; }
+  .yuandai-wrap { flex-direction: column; gap: 20px; padding: 20px; }
+  .yuandai-svg { width: 160px; height: 220px; }
+  .scroll-title { font-size: 22px; }
+  .meet-row { flex-wrap: wrap; }
+  .dialog { padding: 16px 18px; }
+  .dialog-body { font-size: 15px; }
+  .choices { padding: 16px 20px; }
+}
+
+/* ========== 袁采问对（Coze 全屏浮层） ========== */
+#chat-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(10, 6, 3, 0.95);
+  animation: fadeIn 0.4s ease;
+}
+#chat-overlay.hidden { display: none !important; }
+.chat-close-btn {
+  position: fixed; top: 16px; right: 16px;
+  width: 44px; height: 44px;
+  font-size: 22px;
+  z-index: 201;
+  background: rgba(244,231,200,0.15);
+  color: var(--paper);
+  border-color: rgba(212,185,122,0.5);
+}
+.chat-close-btn:hover { background: rgba(244,231,200,0.28); }
+#chat-iframe {
+  width: 100%; height: 100%;
+  border: 0;
+  display: block;
+}

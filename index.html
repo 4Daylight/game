@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>此间处己·一室录</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 顶栏 -->
+<header id="topbar" class="topbar hidden">
+  <div class="topbar-title">此间处己·一室录</div>
+  <div class="topbar-stats"></div>
+  <button class="icon-btn" id="btn-summary" title="查看总结">录</button>
+  <button class="icon-btn" id="btn-chat" title="问袁采">问</button>
+</header>
+
+<!-- 全局容器 -->
+<main id="stage">
+
+  <!-- 袁采卷轴开场 -->
+  <section id="screen-yuandai" class="screen">
+    <div class="yuandai-wrap">
+      <svg class="yuandai-svg" viewBox="0 0 240 320" aria-label="袁采 Q版">
+        <defs>
+          <linearGradient id="robeGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#4b7fbf"/>
+            <stop offset="100%" stop-color="#2f5a8e"/>
+          </linearGradient>
+          <linearGradient id="scrollGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f5e6c4"/>
+            <stop offset="100%" stop-color="#e8d29b"/>
+          </linearGradient>
+        </defs>
+
+
+      <div class="yuandai-text">
+        <h1 class="scroll-title">此间处己·一室录</h1>
+        <p class="scroll-sub">— 基于《袁氏世范·处己篇》的寝室交互游戏 —</p>
+        <div class="scroll-divider"></div>
+        <p class="scroll-body">
+          南宋淳熙年间，袁采著《袁氏世范》三卷，
+          以"处己、睦亲、处世"立言，教人修身齐家之道。
+          今取其"处己篇"之精神，置之于一室之中——
+          四人同舍，性情各异，
+          你的每一个选择，都将映照自己心底的光与影。
+        </p>
+        <div class="scroll-divider"></div>
+        <p class="scroll-foot">点击任意处，进入宿舍</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 角色登场：每位舍友一幕 -->
+  <section id="screen-meet" class="screen hidden">
+    <div class="meet-single">
+      <img class="meet-icon" id="meet-icon" />
+      <div class="meet-name" id="meet-name"></div>
+      <div class="meet-personality" id="meet-personality"></div>
+    </div>
+    <div class="meet-text" id="meet-text"></div>
+    <button class="btn btn-primary" id="btn-meet-next">认识下一位 ▸</button>
+  </section>
+
+  <!-- 命名 -->
+  <section id="screen-name" class="screen hidden">
+    <div class="scene-bg" style="background-image:url('assets/dorm.png')"></div>
+    <div class="scene-veil"></div>
+    <div class="name-card">
+      <h2>请告诉我你的名字</h2>
+      <p class="name-sub">默认：王晓宇</p>
+      <input id="input-name" type="text" maxlength="6" placeholder="王晓宇" value="王晓宇">
+      <button class="btn btn-primary" id="btn-start">继续</button>
+    </div>
+  </section>
+
+  <!-- 选择寝室 -->
+  <section id="screen-dorm" class="screen hidden">
+    <div class="scene-bg" style="background-image:url('assets/dorm.png')"></div>
+    <div class="scene-veil"></div>
+    <div class="dorm-card">
+      <h2>请选择你的寝室</h2>
+      <p class="name-sub">— 这将是你此番修行的方寸之地 —</p>
+      <div class="dorm-choices">
+        <button class="btn btn-primary dorm-btn" id="btn-dorm-female">入女寝</button>
+        <button class="btn btn-primary dorm-btn" id="btn-dorm-male">入男寝</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 主场景：剧情 -->
+  <section id="screen-scene" class="screen hidden">
+    <div class="scene-bg" id="scene-bg"></div>
+    <div class="scene-veil"></div>
+
+    <!-- 对话框:说话人条浮在框上沿 -->
+    <div class="dialog" id="dialog">
+      <div class="dialog-header" id="dialog-header">
+        <img class="dialog-icon" id="dialog-icon" />
+        <div class="dialog-speaker" id="dialog-speaker"></div>
+      </div>
+      <div class="dialog-body" id="dialog-body"></div>
+      <button class="btn btn-ghost" id="btn-next">继续 ▸</button>
+    </div>
+
+    <!-- 选择层 -->
+    <div class="choices hidden" id="choices"></div>
+  </section>
+
+  <!-- 袁采原文/启示浮层 -->
+  <section id="screen-quote" class="screen hidden">
+    <div class="quote-wrap">
+      <div class="quote-card">
+        <div class="quote-yuandai">
+          <img src="assets/yuandai.png" alt="袁采" />
+        </div>
+        <div class="quote-content">
+          <div class="quote-line">
+            <span class="quote-mark">📜</span>
+            <span class="quote-text" id="quote-text"></span>
+          </div>
+          <div class="quote-insight">
+            <span class="insight-mark">🌿</span>
+            <span class="insight-text" id="insight-text"></span>
+          </div>
+          <div class="quote-effect" id="quote-effect"></div>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="btn-quote-next">继续 ▸</button>
+    </div>
+  </section>
+
+  <!-- 总结 -->
+  <section id="screen-summary" class="screen hidden">
+    <div class="summary-wrap">
+      <h1 class="summary-title">录终·一室之省</h1>
+      <p class="summary-sub">— 你此番所历之原文与启示，悉录于此 —</p>
+
+      <div class="summary-tables">
+        <div class="summary-card">
+          <h3>数值终态</h3>
+          <div class="summary-values" id="summary-values"></div>
+        </div>
+        <div class="summary-card">
+          <h3>室友好感</h3>
+          <div class="summary-rels" id="summary-rels"></div>
+        </div>
+        <div class="summary-card">
+          <h3>处世人格</h3>
+          <div class="summary-arch" id="summary-arch"></div>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <h3>所历原文</h3>
+        <ol class="summary-quotes" id="summary-quotes"></ol>
+      </div>
+
+      <div class="summary-card">
+        <h3>一室之省</h3>
+        <p class="summary-final" id="summary-final"></p>
+      </div>
+
+      <div class="summary-actions">
+        <button class="btn btn-primary" id="btn-replay">再历此室</button>
+        <button class="btn btn-ghost" id="btn-exit" style="display:none">退出</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- BGM / 音效控制 -->
+<button id="btn-mute" class="icon-btn mute-btn" title="静音">♪</button>
+
+<!-- 袁采问对（Coze 智能体全屏浮层） -->
+<div id="chat-overlay" class="hidden">
+  <button class="icon-btn chat-close-btn" id="btn-chat-close" title="返回游戏">×</button>
+  <iframe
+    id="chat-iframe"
+    src="about:blank"
+    title="袁采问对"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+    allow="microphone; clipboard-write"
+    referrerpolicy="no-referrer"
+    loading="lazy"></iframe>
+</div>
+
+<script src="data.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

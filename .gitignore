@@ -1,0 +1,11 @@
+# 项目数据 / 本地记忆（不入库）
+.workbuddy/
+.idea/
+
+# 系统/编辑器缓存
+*.log
+.DS_Store
+Thumbs.db
+
+# 依赖（本项目纯前端，暂无）
+node_modules/
