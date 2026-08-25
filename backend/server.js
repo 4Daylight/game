@@ -9,18 +9,20 @@ app.use(express.json());
 app.use(cors({ origin: 'https://4daylight.github.io' }));
 
 const dbUrl = process.env.DATABASE_URL || process.env.MYSQL_URL;
+
 let pool;
 if (dbUrl) {
   pool = mysql.createPool(dbUrl);
 } else {
   pool = mysql.createPool({
-    host:     process.env.DB_HOST,
-    port:     process.env.DB_PORT || 3306,
-    user:     process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+    host:     process.env.MYSQLHOST || process.env.DB_HOST,
+    port:     process.env.MYSQLPORT || process.env.DB_PORT || 3306,
+    user:     process.env.MYSQLUSER || process.env.DB_USER,
+    password: process.env.MYSQLPASSWORD || process.env.DB_PASSWORD,
+    database: process.env.MYSQLDATABASE || process.env.DB_NAME,
   });
 }
+
 
 // 启动时自动建表（如果不存在）
 (async () => {
