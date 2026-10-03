@@ -181,7 +181,7 @@ button, input { font-family: inherit; }
 /* 【修改】首页背景为山水卷轴图，去除遮罩 */
 #screen-yuandai {
   background:
-    url('assets/bg_landscape.png') center/cover no-repeat;
+    url('assets/bg_landscape.webp') center/cover no-repeat;
 }
 .yuandai-wrap {
   display: flex;
@@ -190,10 +190,10 @@ button, input { font-family: inherit; }
   max-width: 920px;
   align-items: center;
 }
-/* 【修改】左边人物icon删除，替换为yuandai.png */
+/* 【修改】左边人物icon删除，替换为yuandai.webp */
 .yuandai-svg {
   width: 240px; height: 320px;
-  background: url('assets/yuandai.png') center/contain no-repeat;
+  background: url('assets/yuandai.webp') center/contain no-repeat;
   background-color: transparent;
   filter: drop-shadow(0 6px 20px rgba(0,0,0,0.5));
   opacity: 0;
@@ -280,7 +280,7 @@ button, input { font-family: inherit; }
   justify-content: center;
   background:
     linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.6)),
-    url('assets/dorm.png') center/cover no-repeat;
+    url('assets/dorm.webp') center/cover no-repeat;
 }
 /* 【修改】按钮取消固定底部，改为流式布局随内容居中 */
 #screen-meet .btn {
@@ -593,7 +593,7 @@ button, input { font-family: inherit; }
 #screen-summary {
   background:
     linear-gradient(rgba(20, 12, 6, 0.8), rgba(20, 12, 6, 0.9)),
-    url('assets/bg_landscape.png') center/cover no-repeat;
+    url('assets/bg_landscape.webp') center/cover no-repeat;
   padding: 120px 20px 40px;
   align-items: flex-start;
   overflow-y: auto;

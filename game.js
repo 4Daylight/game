@@ -61,10 +61,10 @@ function formatEffect(eff) {
 
 /* ========== 角色 → 图片映射 ========== */
 const CHAR_IMG = {
-  m: 'assets/fire_black.png',
-  s: 'assets/fire_3.png',
-  q: 'assets/fire_1.png',
-  l: 'assets/fire_2.png'
+  m: 'assets/fire_black.webp',
+  s: 'assets/fire_3.webp',
+  q: 'assets/fire_1.webp',
+  l: 'assets/fire_2.webp'
 };
 
 /* ========== Meet 循环展示 ========== */
@@ -161,7 +161,7 @@ function resetLineQueue() {
   State.allLines = null;
 }
 
-/* ========== 火柴人渲染(旧 API 保留,内部走 PNG) ========== */
+/* ========== 火柴人渲染(旧 API 保留,内部走 WEBP) ========== */
 const STICK_COLORS = {
   m: '#1a1a1a',
   s: '#1e3a8a',
@@ -189,7 +189,7 @@ function runScene(sceneId) {
   $('choices').classList.add('hidden');
 
   // 背景图(scene.bg 优先,默认宿舍)
-  const bgMap = { dorm: 'assets/dorm.png', library: 'assets/library.png' };
+  const bgMap = { dorm: 'assets/dorm.webp', library: 'assets/library.webp' };
   const bgKey = scene.bg || 'dorm';
   $('scene-bg').style.backgroundImage = `url('${bgMap[bgKey] || bgMap.dorm}')`;
 
@@ -282,7 +282,7 @@ function onPick(choice) {
     $('dialog').classList.remove('hidden');
     $('dialog-header').classList.remove('hidden');
     $('choices').classList.add('hidden');
-    $('scene-bg').style.backgroundImage = "url('assets/dorm.png')";
+    $('scene-bg').style.backgroundImage = "url('assets/dorm.webp')";
     resetLineQueue();
     pushNextLine();
     $('btn-next').textContent = '继续 ▸';
@@ -581,7 +581,7 @@ function start() {
     const overlay = $('chat-overlay');
     const frame = $('chat-iframe');
     if (!frame.dataset.loaded) {
-      frame.src = 'https://t4px57smqs.coze.site/';
+      frame.src = 'https://yuancaichat.pages.dev/';
       frame.dataset.loaded = '1';
     }
     overlay.classList.remove('hidden');
