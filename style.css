@@ -503,8 +503,11 @@ button, input { font-family: inherit; }
   letter-spacing: 1px;
 }
 /* ========== 袁采原文浮层 ========== */
+/* 【修改】原文/启示浮层：纯色背景改为山水图 + 深色阴影蒙版 */
 #screen-quote {
-  background: rgba(10, 6, 3, 0.92);
+  background:
+    linear-gradient(rgba(10, 6, 3, 0.72), rgba(10, 6, 3, 0.86)),
+    url('assets/bg_landscape_quote.webp') center/cover no-repeat;
   backdrop-filter: blur(4px);
   animation: fadeIn 0.5s ease;
 }
