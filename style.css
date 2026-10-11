@@ -37,10 +37,6 @@ html, body {
   -webkit-user-select: none;
 }
 body {
-  /* 【适配】固定视口：防移动端橡皮筋滚动，dvh 解决地址栏收展问题（fallback 100%） */
-  position: fixed;
-  inset: 0;
-  height: 100dvh;
   background:
     radial-gradient(ellipse at 50% 30%, #3a2a18 0%, #1a1108 100%);
 }
@@ -189,8 +185,8 @@ button, input { font-family: inherit; }
 }
 .yuandai-wrap {
   display: flex;
-  gap: clamp(20px, 3vw, 36px);
-  padding: clamp(16px, 4vw, 40px) clamp(20px, 6vw, 60px); /* 【适配】流式内边距 */
+  gap: 36px;
+  padding: 40px 60px;
   max-width: 920px;
   align-items: center;
 }
@@ -308,10 +304,8 @@ button, input { font-family: inherit; }
 }
 /* 【修改】人物图标去除底色，保持透明与背景融合 */
 .meet-icon {
-  /* 【适配】流式尺寸 + 等比缩放 */
-  width: clamp(110px, 22vw, 165px);
-  aspect-ratio: 165 / 255;
-  height: auto;
+  width: 165px;
+  height: 255px;
   object-fit: contain;
   display: block;
   margin: 0 auto 8px;
@@ -353,7 +347,7 @@ button, input { font-family: inherit; }
 .name-card {
   background: rgba(244,231,200,0.95);
   border: 1px solid var(--wood);
-  padding: clamp(24px, 4vw, 36px) clamp(24px, 5vw, 48px); /* 【适配】流式内边距 */
+  padding: 36px 48px;
   border-radius: 4px;
   text-align: center;
   z-index: 2;
@@ -365,7 +359,7 @@ button, input { font-family: inherit; }
 .dorm-card {
   background: rgba(244,231,200,0.95);
   border: 1px solid var(--wood);
-  padding: clamp(24px, 4vw, 36px) clamp(24px, 5vw, 48px); /* 【适配】流式内边距 */
+  padding: 36px 48px;
   border-radius: 4px;
   text-align: center;
   z-index: 2;
@@ -376,7 +370,7 @@ button, input { font-family: inherit; }
 .dorm-btn { min-width: 140px; }
 #input-name {
   display: block;
-  width: min(280px, 80vw); /* 【适配】窄屏不溢出 */
+  width: 280px;
   margin: 0 auto 20px;
   padding: 12px;
   font-size: 18px;
@@ -439,10 +433,8 @@ button, input { font-family: inherit; }
 }
 /* 【修改】对话框人物图标放大，去除底色 */
 .dialog-icon {
-  /* 【适配】流式尺寸 + 等比缩放，小屏不再遮挡文字 */
-  width: clamp(120px, 24vw, 240px);
-  aspect-ratio: 2 / 3;
-  height: auto;
+  width: 240px;
+  height: 360px;
   object-fit: contain;
   display: block;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
@@ -450,7 +442,7 @@ button, input { font-family: inherit; }
 }
 .dialog-speaker {
   font-weight: 700;
-  font-size: clamp(20px, 3.5vw, 32px); /* 【适配】流式字号 */
+  font-size: 32px;
   letter-spacing: 2px;
 }
 /* 对话框 */
@@ -462,7 +454,7 @@ button, input { font-family: inherit; }
   background:
     linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
   border-top: 4px solid var(--wood);
-  padding: clamp(16px, 2.5vw, 28px) clamp(18px, 4vw, 40px) clamp(14px, 2.2vw, 26px); /* 【适配】流式内边距 */
+  padding: 28px 40px 26px;
   box-shadow: 0 -8px 30px rgba(0,0,0,0.4);
   width: 100%;
   display: flex;
@@ -528,11 +520,11 @@ button, input { font-family: inherit; }
 .quote-card {
   background:
     linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
-  padding: clamp(24px, 3.5vw, 36px) clamp(22px, 4vw, 40px); /* 【适配】流式内边距 */
+  padding: 36px 40px;
   border: 1px solid var(--paper-dark);
   border-radius: 4px;
   display: flex;
-  gap: clamp(14px, 2.5vw, 28px);
+  gap: 28px;
   align-items: flex-start;
   box-shadow: var(--shadow-deep);
   position: relative;
@@ -561,8 +553,7 @@ button, input { font-family: inherit; }
 .quote-yuandai { flex-shrink: 0; }
 /* 【修改】袁采原文浮层图标去除底色 */
 .quote-yuandai img {
-  width: clamp(96px, 12vw, 140px); /* 【适配】流式宽度 */
-  height: auto;
+  width: 140px; height: auto;
   filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
   background: transparent;
 }
@@ -638,7 +629,7 @@ button, input { font-family: inherit; }
     linear-gradient(180deg, rgba(244,231,200,0.95) 0%, rgba(232,213,163,0.95) 100%);
   border: 1px solid var(--wood);
   border-radius: 4px;
-  padding: clamp(16px, 2.5vw, 22px) clamp(18px, 3vw, 28px); /* 【适配】流式内边距 */
+  padding: 22px 28px;
   box-shadow: var(--shadow-deep);
 }
 .summary-card h3 {
@@ -744,38 +735,15 @@ button, input { font-family: inherit; }
 ::-webkit-scrollbar-thumb { background: var(--wood); border-radius: 4px; }
 /* 小屏适配 */
 @media (max-width: 720px) {
-  .topbar { padding: 6px 10px; flex-wrap: wrap; gap: 6px; }
   .topbar-title { font-size: 14px; letter-spacing: 2px; }
   .topbar-stats { font-size: 12px; gap: 8px; }
   .yuandai-wrap { flex-direction: column; gap: 20px; padding: 20px; }
   .yuandai-svg { width: 160px; height: 220px; }
   .scroll-title { font-size: 22px; }
   .meet-row { flex-wrap: wrap; }
-  .dialog-header { left: 12px; } /* 【适配】小屏说话人条贴边 */
   .dialog { padding: 16px 18px; }
   .dialog-body { font-size: 15px; }
   .choices { padding: 16px 20px; }
-}
-
-/* 【适配】矮屏 / 手机横屏：压缩立绘与文字高度，防止溢出 */
-@media (max-height: 500px) {
-  .dialog-icon { width: clamp(80px, 18vh, 140px); }
-  .dialog-header { left: 16px; }
-  .dialog-body { font-size: 14px; line-height: 1.7; max-height: 34vh; }
-  #screen-scene { padding-top: 42px; }
-  .yuandai-wrap { flex-direction: row; gap: 20px; padding: 14px 32px; }
-  .yuandai-svg { width: 120px; height: 160px; }
-  .scroll-body { font-size: 13px; line-height: 1.7; }
-  .meet-single { padding: 14px 24px 12px; }
-  .meet-icon { width: clamp(90px, 20vh, 130px); }
-  .meet-text { font-size: 13px; }
-}
-
-/* 【适配】超宽 / 大屏：内容限宽居中，避免拉满整屏 */
-@media (min-width: 1600px) {
-  .dialog { max-width: 1400px; margin-left: auto; margin-right: auto; }
-  .choices { max-width: 1400px; margin-left: auto; margin-right: auto; }
-  .dialog-body { font-size: 18px; }
 }
 
 /* ========== 袁采问对（Coze 全屏浮层） ========== */
