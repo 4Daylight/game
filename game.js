@@ -188,10 +188,10 @@ function runScene(sceneId) {
   $('dialog-header').classList.remove('hidden');
   $('choices').classList.add('hidden');
 
-  // 背景图(scene.bg 优先,默认宿舍)
-  const bgMap = { dorm: 'assets/dorm.webp', library: 'assets/library.webp' };
-  const bgKey = scene.bg || 'dorm';
-  $('scene-bg').style.backgroundImage = `url('${bgMap[bgKey] || bgMap.dorm}')`;
+  // 背景图(scene.bg 优先,默认宿舍)——【适配v2】改为 data-bg 属性，由 CSS 按横/竖屏切换图片
+  const bgMap = { dorm: 1, library: 1 };
+  const bgKey = (scene.bg && bgMap[scene.bg]) ? scene.bg : 'dorm';
+  $('scene-bg').dataset.bg = bgKey;
 
   // 行展开
   State.lineQueue = [];
@@ -282,7 +282,7 @@ function onPick(choice) {
     $('dialog').classList.remove('hidden');
     $('dialog-header').classList.remove('hidden');
     $('choices').classList.add('hidden');
-    $('scene-bg').style.backgroundImage = "url('assets/dorm.webp')";
+    $('scene-bg').dataset.bg = 'dorm';
     resetLineQueue();
     pushNextLine();
     $('btn-next').textContent = '继续 ▸';

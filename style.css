@@ -37,6 +37,10 @@ html, body {
   -webkit-user-select: none;
 }
 body {
+  /* 【适配v2】固定视口：防移动端橡皮筋滚动；dvh 解决地址栏收展（fallback 100%） */
+  position: fixed;
+  inset: 0;
+  height: 100dvh;
   background:
     radial-gradient(ellipse at 50% 30%, #3a2a18 0%, #1a1108 100%);
 }
@@ -767,4 +771,124 @@ button, input { font-family: inherit; }
   width: 100%; height: 100%;
   border: 0;
   display: block;
+}
+
+/* ========== 屏幕适配 v2（分档式，桌面为基准不动） ========== */
+
+/* ---- 平板档：721–1224px（iPad mini/Pro 竖横屏） ---- */
+@media (min-width: 721px) and (max-width: 1224px) {
+  .dialog-icon { width: 170px; height: 255px; }
+  .dialog-speaker { font-size: 26px; }
+  .dialog { padding: 22px 30px 20px; }
+  .dialog-body { font-size: 16px; }
+  .choices { padding: 20px 40px 26px; }
+  .meet-icon { width: 140px; height: 216px; }
+  .yuandai-svg { width: 200px; height: 266px; }
+  .quote-yuandai img { width: 120px; }
+  .btn { font-size: 15px; }
+}
+
+/* ---- 手机档：≤720px（立绘降级为对话框内联小头像，整体紧凑化） ---- */
+@media (max-width: 720px) {
+  /* 顶栏 */
+  .topbar { padding: 6px 10px; flex-wrap: wrap; gap: 6px; }
+  .topbar-title { font-size: 14px; letter-spacing: 2px; margin-right: 10px; }
+  .topbar-stats { font-size: 12px; gap: 8px; }
+  .icon-btn { width: 32px; height: 32px; font-size: 14px; }
+
+  /* 开场卷轴页 */
+  .yuandai-wrap { flex-direction: column; gap: 20px; padding: 20px; }
+  .yuandai-svg { width: 150px; height: 200px; }
+  .scroll-title { font-size: 22px; }
+  .scroll-body { font-size: 13px; line-height: 1.9; }
+
+  /* 舍友介绍页 */
+  .meet-single { width: min(320px, 90vw); padding: 20px 24px 16px; }
+  .meet-icon { width: 96px; height: 148px; }
+  .meet-name { font-size: 20px; }
+  .meet-personality { font-size: 12px; }
+
+  /* 命名 / 选寝卡片 */
+  .name-card, .dorm-card { padding: 24px 22px; }
+  .dorm-choices { flex-direction: column; gap: 12px; }
+  #input-name { width: min(280px, 84vw); }
+
+  /* 对话框：改为纵向排布（头像行 + 正文行 + 右下按钮） */
+  .dialog { flex-direction: column; align-items: stretch; gap: 10px; padding: 14px 16px 12px; }
+  .dialog > .btn { align-self: flex-end; }
+  .dialog-header { position: static; padding: 0; }
+  .dialog-icon { width: 64px; height: 96px; }
+  .dialog-speaker { font-size: 18px; }
+  .dialog-body { font-size: 14px; line-height: 1.8; max-height: 38vh; }
+
+  /* 选项层 */
+  .choices { padding: 14px 16px 18px; }
+  .choices-prompt { font-size: 12px; }
+  .btn-choice { font-size: 14px; padding: 10px 14px; line-height: 1.6; margin-bottom: 8px; }
+
+  /* 场景小人 / 原文浮层 / 总结页 */
+  .character { width: 60px; }
+  .quote-card { padding: 22px; gap: 16px; }
+  .quote-yuandai img { width: 96px; }
+  .quote-text { font-size: 15px; }
+  .summary-title { font-size: 24px; }
+  #screen-summary { padding: 90px 14px 30px; }
+}
+
+/* ---- 小手机档：≤380px 再压一档 ---- */
+@media (max-width: 380px) {
+  .dialog-icon { width: 52px; height: 78px; }
+  .dialog-body { font-size: 13px; }
+  .yuandai-svg { width: 120px; height: 160px; }
+  .meet-icon { width: 84px; height: 130px; }
+}
+
+/* ---- 横屏矮屏档：≤500px 高（手机横屏 / 矮窗口，按视口高度压缩） ---- */
+@media (max-height: 500px) {
+  .dialog { flex-direction: column; align-items: stretch; gap: 8px; padding: 12px 20px 10px; }
+  .dialog > .btn { align-self: flex-end; }
+  .dialog-header { position: static; padding: 0; }
+  .dialog-icon { width: clamp(56px, 18vh, 96px); height: auto; aspect-ratio: 2 / 3; }
+  .dialog-body { max-height: 34vh; line-height: 1.6; }
+  #screen-scene { padding-top: 42px; }
+  .yuandai-wrap { flex-direction: row; gap: 16px; padding: 12px 28px; }
+  .yuandai-svg { width: 110px; height: 146px; }
+  .meet-single { padding: 12px 20px 10px; }
+  .meet-icon { width: clamp(90px, 22vh, 120px); height: auto; aspect-ratio: 165 / 255; }
+}
+
+/* ---- 场景背景：改为按 类名/data-bg 属性 指定图片（配合竖屏切换） ---- */
+.scene-bg.bg-dorm,
+.scene-bg[data-bg="dorm"]    { background-image: url('assets/dorm.webp'); }
+.scene-bg[data-bg="library"] { background-image: url('assets/library.webp'); }
+
+/* ---- 竖屏背景切换（L2 竖版素材 3:4）+ 焦点校正 ---- */
+@media (orientation: portrait) and (max-width: 820px) {
+  /* 动态场景背景（game.js 设置 data-bg）与命名/选寝页 */
+  .scene-bg.bg-dorm,
+  .scene-bg[data-bg="dorm"]    { background-image: url('assets/dorm_p.webp'); }
+  .scene-bg[data-bg="library"] { background-image: url('assets/library_p.webp'); }
+
+  /* 静态页面背景（保留原有蒙层） */
+  #screen-yuandai {
+    background: url('assets/bg_landscape_p.webp') center/cover no-repeat;
+  }
+  #screen-meet {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.6)),
+      url('assets/dorm_p.webp') center/cover no-repeat;
+  }
+  #screen-quote {
+    background:
+      linear-gradient(rgba(10, 6, 3, 0.72), rgba(10, 6, 3, 0.86)),
+      url('assets/bg_landscape_quote_p.webp') center/cover no-repeat;
+  }
+  #screen-summary {
+    background:
+      linear-gradient(rgba(20, 12, 6, 0.8), rgba(20, 12, 6, 0.9)),
+      url('assets/bg_landscape_p.webp') center/cover no-repeat;
+  }
+
+  /* 焦点微调 */
+  .scene-bg { background-position: center 45%; }
 }
