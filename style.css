@@ -36,6 +36,12 @@ html, body {
   user-select: none;
   -webkit-user-select: none;
 }
+/* 【适配】禁用移动端浏览器"字体大小/字体放大"功能（font boosting），
+   防止大字体下文字撑爆容器、按钮被顶出屏幕 */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 body {
   /* 【适配v2】固定视口：防移动端橡皮筋滚动；dvh 解决地址栏收展（fallback 100%） */
   position: fixed;
@@ -813,26 +819,36 @@ button, input { font-family: inherit; }
   .dorm-choices { flex-direction: column; gap: 12px; }
   #input-name { width: min(280px, 84vw); }
 
-  /* 对话框：改为纵向排布（头像行 + 正文行 + 右下按钮） */
+  /* 对话框：立绘悬浮在对话框上方（还原桌面式布局），正文+按钮纵向排布 */
   .dialog { flex-direction: column; align-items: stretch; gap: 10px; padding: 14px 16px 12px; }
   .dialog > .btn { align-self: flex-end; }
-  .dialog-header { position: static; padding: 0; }
-  .dialog-icon { width: 64px; height: 96px; }
-  .dialog-speaker { font-size: 18px; }
-  .dialog-body { font-size: 14px; line-height: 1.8; max-height: 38vh; }
+  .dialog-header { left: 12px; }
+  .dialog-icon { width: clamp(96px, 20vw, 150px); height: auto; aspect-ratio: 2 / 3; }
+  .dialog-speaker { font-size: 20px; }
+  .dialog-body { font-size: 14px; line-height: 1.8; max-height: 36vh; }
 
   /* 选项层 */
   .choices { padding: 14px 16px 18px; }
   .choices-prompt { font-size: 12px; }
   .btn-choice { font-size: 14px; padding: 10px 14px; line-height: 1.6; margin-bottom: 8px; }
 
-  /* 场景小人 / 原文浮层 / 总结页 */
+  /* 场景小人 / 总结页 */
   .character { width: 60px; }
-  .quote-card { padding: 22px; gap: 16px; }
-  .quote-yuandai img { width: 96px; }
-  .quote-text { font-size: 15px; }
   .summary-title { font-size: 24px; }
   #screen-summary { padding: 90px 14px 30px; }
+
+  /* 原文/启示浮层：纵向堆叠让文字占满侧边空间；页面可滚动，
+     确保大字体下"继续"按钮始终可达 */
+  #screen-quote { overflow-y: auto; align-items: flex-start; }
+  .quote-wrap { margin-top: auto; margin-bottom: auto; }
+  .quote-card { flex-direction: column; gap: 14px; padding: 18px 16px; }
+  .quote-yuandai img { width: 84px; }
+  .quote-content { padding-right: 0; }
+  .quote-text { font-size: 15px; }
+  .insight-text { font-size: 14px; }
+
+  /* 舍友介绍页大字体兜底：可滚动 */
+  #screen-meet { overflow-y: auto; justify-content: safe center; }
 }
 
 /* ---- 小手机档：≤380px 再压一档 ---- */
@@ -847,8 +863,8 @@ button, input { font-family: inherit; }
 @media (max-height: 500px) {
   .dialog { flex-direction: column; align-items: stretch; gap: 8px; padding: 12px 20px 10px; }
   .dialog > .btn { align-self: flex-end; }
-  .dialog-header { position: static; padding: 0; }
-  .dialog-icon { width: clamp(56px, 18vh, 96px); height: auto; aspect-ratio: 2 / 3; }
+  .dialog-header { left: 12px; }
+  .dialog-icon { width: clamp(56px, 16vh, 96px); height: auto; aspect-ratio: 2 / 3; }
   .dialog-body { max-height: 34vh; line-height: 1.6; }
   #screen-scene { padding-top: 42px; }
   .yuandai-wrap { flex-direction: row; gap: 16px; padding: 12px 28px; }
